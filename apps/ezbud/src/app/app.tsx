@@ -1,15 +1,13 @@
-import styled from 'styled-components';
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles, light, theme } from './components';
+import { SignUp } from './pages/sign-up';
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="ezbud" />
-    </StyledApp>
+    <ThemeProvider theme={{ ...theme }}>
+      <GlobalStyles />
+      <SignUp />
+    </ThemeProvider>
   );
 }
 
