@@ -1,12 +1,17 @@
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyles, light, theme } from './components';
-import { SignUp } from './pages/sign-up';
+import styled, { ThemeProvider } from 'styled-components';
+import { SignUp } from './pages';
+import { theme, GlobalStyles } from '@ui';
 
+const MainContainer = styled.main`
+  color: ${(props) => props.theme.color.text};
+`;
 export function App() {
   return (
     <ThemeProvider theme={{ ...theme }}>
       <GlobalStyles />
-      <SignUp />
+      <MainContainer>
+        <SignUp />
+      </MainContainer>
     </ThemeProvider>
   );
 }

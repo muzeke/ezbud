@@ -20,17 +20,18 @@ declare module 'styled-components' {
       transition: string; // all 0.25s cubic-bezier(0.645,0.045,0.355,1)
     };
 
-    color?: {
-      primary?: string;
-      secondary?: string;
+    color: {
+      primary: string;
+      secondary: string;
       background?: string;
       text?: string;
       border?: string;
 
-      slate: string;
-      lightSlate: string;
-      lighterSlate: string;
-      lightestSlate: string;
+      red: string;
+      green: string;
+      grey: string;
+      blue: string;
+      white: string;
     };
 
     lineHeights?: {
@@ -43,5 +44,7 @@ declare module 'styled-components' {
       light: string;
       dark: string;
     };
+
+    polishedLevels: numbers[];
   }
 }
