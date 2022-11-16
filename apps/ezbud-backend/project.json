@@ -1,0 +1,61 @@
+{
+  "name": "ezbud-backend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ezbud-backend/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/ezbud-backend",
+        "main": "apps/ezbud-backend/src/main.ts",
+        "tsConfig": "apps/ezbud-backend/tsconfig.app.json",
+        "assets": ["apps/ezbud-backend/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "externalDependencies": "none",
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/ezbud-backend/src/environments/environment.ts",
+              "with": "apps/ezbud-backend/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "ezbud-backend:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "ezbud-backend:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ezbud-backend/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ezbud-backend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
