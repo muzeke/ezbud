@@ -39,7 +39,7 @@ export const SignUp = () => {
             display="inline-block"
             fontWeight={600}
           >
-            SignUp
+            SignUp Now
           </Typography.Header2>
         </SBox.Header>
 
