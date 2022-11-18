@@ -1,13 +1,16 @@
 import { Router } from 'express';
-import { CategoryController } from './controller';
 import { processRequestBody } from 'zod-express-middleware';
-import { createCategorySchema } from './validator';
-import { ApiRoutes } from '@enums';
+
+import { ApiRoute } from '@enums';
+
+import { expressRouterHandler } from '../../middlewares';
+import { CategoryController } from './controller';
+import { createCategory } from './validator';
 
 export const categoryRoutes = Router();
 
 categoryRoutes.post(
-  ApiRoutes.category__create,
-  processRequestBody(createCategorySchema.body),
-  CategoryController().createCategory()
+  ApiRoute.category__create,
+  processRequestBody(createCategory.body),
+  expressRouterHandler(CategoryController().createCategory)
 );

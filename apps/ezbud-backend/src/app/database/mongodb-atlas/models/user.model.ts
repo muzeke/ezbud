@@ -1,7 +1,9 @@
 import * as mongoose from 'mongoose';
-import { UserAttributes, MongooseAttributes } from '@shapes';
-import { validateEmail } from '../../../utils';
+
 import { ModelSchema } from '@enums';
+import { MongooseAttributes, UserAttributes } from '@shapes';
+
+import { validateEmail } from '../../../utils';
 
 const { Schema } = mongoose;
 

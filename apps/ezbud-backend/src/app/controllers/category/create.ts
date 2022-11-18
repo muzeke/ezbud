@@ -1,13 +1,14 @@
-import { CategoryAttributes } from '@shapes';
 import chalk = require('chalk');
-import { Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
+import { Request } from 'express';
+
+import { CategoryAttributes } from '@shapes';
+
 import { createCategory } from '../../services';
+import { routerResponse } from '../../utils';
 
 export const CreateCategory = () => {
   const route = async (
-    httpRequest: Request<never, never, CategoryAttributes>,
-    httpResponse: Response
+    httpRequest: Request<never, never, CategoryAttributes>
   ) => {
     const { body } = httpRequest;
     const { name, user, categoryGroup } = body;
@@ -16,21 +17,15 @@ export const CreateCategory = () => {
     try {
       const response = await createCategory({ name, user, categoryGroup });
 
-      return httpResponse.status(StatusCodes.CREATED).json({
-        success: true,
-        message: 'Category was successfully added',
-        details: {
-          ...response,
-        },
-      });
+      return routerResponse.Created<CategoryAttributes>(response);
     } catch (error) {
       console.error(chalk.red(`Error -->`, error));
-      httpResponse.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        error: 'An error occured while creating a category group',
-        message: error,
+      return routerResponse.InvalidParameterValue({
+        error,
+        message: 'An error occured while create a user account',
       });
     }
   };
 
-  return route;
+  return { route };
 };

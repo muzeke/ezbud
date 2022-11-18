@@ -21,7 +21,7 @@ integrateRoutes(router);
 mongoDbAtlas().connect();
 
 const server = app.listen(port, () => {
-  console.log(`${chalk.green(`Listening at http://localhost:${port}/api`)}`);
+  console.log(`${chalk.green(`Listening at http://localhost:${port}/`)}`);
 });
 
 server.on('error', console.error);

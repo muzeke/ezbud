@@ -5,3 +5,6 @@ export * from './category.shape';
 export * from './mongoose.shape';
 export * from './transaction.shape';
 export * from './user.shape';
+export * from './login.shape';
+export * from './http-request.shape';
+export * from './token.shape';

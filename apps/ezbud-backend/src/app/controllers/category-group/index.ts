@@ -2,22 +2,26 @@ import { Router } from 'express';
 import { CategoryGroupController } from './controller';
 import { processRequestBody } from 'zod-express-middleware';
 import { createCategoryGroupSchema } from './validator';
-import { ApiRoutes } from '@enums';
+import { ApiRoute } from '@enums';
+import { VerifyAuthToken, expressRouterHandler } from '../../middlewares';
 
 export const categoryGroupRoutes = Router();
 
 categoryGroupRoutes.post(
-  ApiRoutes.category_group__create,
+  ApiRoute.category_group__create,
   processRequestBody(createCategoryGroupSchema.body),
-  CategoryGroupController().createCategoryGroup()
+  VerifyAuthToken,
+  expressRouterHandler(CategoryGroupController().createCategoryGroup)
 );
 
 categoryGroupRoutes.get(
-  ApiRoutes.category_group__read,
-  CategoryGroupController().readCategoryGroup()
+  ApiRoute.category_group__read,
+  VerifyAuthToken,
+  expressRouterHandler(CategoryGroupController().readCategoryGroup)
 );
 
 categoryGroupRoutes.get(
-  `${ApiRoutes.category_group__read}/:categoryGroupId`,
-  CategoryGroupController().readOneCategoryGroup()
+  `${ApiRoute.category_group__read}/:categoryGroupId`,
+  VerifyAuthToken,
+  expressRouterHandler(CategoryGroupController().readOneCategoryGroup)
 );

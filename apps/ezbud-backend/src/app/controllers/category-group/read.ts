@@ -1,12 +1,18 @@
 import chalk = require('chalk');
-import { Request, Response } from 'express';
+import {
+  Request,
+  Response,
+} from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { readCategoryGroup, readOneCategoryGroup } from '../../services';
+
 import { ApiParams } from '@shapes';
 
-//Create the controller route
+import {
+  readCategoryGroup,
+  readOneCategoryGroup,
+} from '../../services';
+
 export const ReadOneCategoryGroup = () => {
-  //function that we will return as an async route handler
   const route = async (
     httpRequest: Request<ApiParams, never, never>,
     httpResponse: Response
@@ -14,17 +20,10 @@ export const ReadOneCategoryGroup = () => {
     const { params } = httpRequest;
 
     const _id = params.categoryGroupId;
-    //try catch block for error handling
     try {
       const response = await readOneCategoryGroup({ _id });
 
-      if (response) {
-        httpResponse.status(StatusCodes.CREATED).json(response);
-      } else {
-        httpResponse.status(StatusCodes.NOT_FOUND).json({
-          error: 'Category not found',
-        });
-      }
+      httpResponse.status(StatusCodes.CREATED).json(response);
 
       return response;
     } catch (error) {
@@ -39,14 +38,11 @@ export const ReadOneCategoryGroup = () => {
   return route;
 };
 
-//Create the controller route
 export const ReadCategoryGroup = () => {
-  //function that we will return as an async route handler
   const route = async (
     httpRequest: Request<any, never, never>,
     httpResponse: Response
   ) => {
-    //try catch block for error handling
     try {
       const response = await readCategoryGroup();
 
